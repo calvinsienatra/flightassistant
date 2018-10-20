@@ -10,7 +10,8 @@
     "@babel/runtime": "^7.1.2",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "^0.57.1",
-    "react-navigation": "^2.18.0"
+    "react-navigation": "^2.18.0",
+    "react-navigation-slide-from-right-transition": "^1.0.4"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",

@@ -7,14 +7,14 @@
  */
 
 import React from 'react';
-import {
-  createStackNavigator,
-} from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
 
 import WelcomeComponent from "./Components/WelcomeComponent";
 import DateTimeComponent from "./Components/DateTimeComponent";
+import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
-const App = createStackNavigator({
+const App = StackNavigator(
+{
   FirstSlide: { 
     screen: WelcomeComponent, 
     navigationOptions: {
@@ -27,6 +27,10 @@ const App = createStackNavigator({
       header: null,
     }
   }
-});
+},
+{
+  transitionConfig: getSlideFromRightTransition,
+}
+);
 
 export default App;
