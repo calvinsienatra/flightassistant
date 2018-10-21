@@ -20,7 +20,7 @@ import getSlideFromRightTransition from 'react-navigation-slide-from-right-trans
 const App = StackNavigator(
 {
   FirstSlide: { 
-    screen: FlightNumberComponent, 
+    screen: WelcomeComponent, 
     navigationOptions: {
       header: null,
     }
@@ -33,6 +33,24 @@ const App = StackNavigator(
   },
   ThirdSlide: { 
     screen: DepartureStationComponent, 
+    navigationOptions: {
+      header: null,
+    }
+  },
+  FourthSlide: { 
+    screen: AirlineNameComponent, 
+    navigationOptions: {
+      header: null,
+    }
+  },
+  FifthSlide: { 
+    screen: FlightNumberComponent, 
+    navigationOptions: {
+      header: null,
+    }
+  },
+  SixthSlide: { 
+    screen: CurrentLocationComponent, 
     navigationOptions: {
       header: null,
     }

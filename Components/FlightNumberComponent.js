@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Alert } from 'react-native';
 import styles from '../styles/MasterStyle';
 import { Header1, Header2, Header3, Header4, Header5, Header6, Subtitle1,
          Subtitle2, Body1, Body2, Button1, Caption, Overline
@@ -13,7 +13,13 @@ class FlightNumberComponent extends Component {
 	
 	constructor(props) {
     super(props);
-    this.state = { text: null };
+    this.state = { 
+    	text: null,
+    	date: this.props.navigation.state.params.chosenDate,
+    	time: this.props.navigation.state.params.chosenTime,
+    	airport: this.props.navigation.state.params.airport,
+    	airlineName: this.props.navigation.state.params.airportName,
+    };
       this.checkInput = this.checkInput.bind(this);
   }
 
@@ -22,12 +28,19 @@ class FlightNumberComponent extends Component {
       Alert.alert('You need to enter a flight number!');
     }else{
       const { navigate } = this.props.navigation;
-      navigate('ThirdSlide', { airport: this.state.text });
+      navigate('SixthSlide', { 
+      	flightNumber: this.state.text, 
+      	date: this.state.date, 
+      	time: this.state.time, 
+      	airport: this.state.airport, 
+      	airlineName: this.state.airlineName });
     }
   }
 
 	render(){
+      	const { navigate } = this.props.navigation;
 		return (
+
 	      <View style={styles.maincontainer}>
 	      	{/* UPPER CONTAINER --> MODIFY*/} 
         <Header3 output='What is your flight number?' style={{textAlign: "center"}}/>
@@ -49,7 +62,7 @@ class FlightNumberComponent extends Component {
 	              size = {40}
 	              style= {{justifyContent: 'space-evenly', alignItems: 'center'}}
 	              onPress={() =>
-	              navigate('SecondSlide')
+	              	this.checkInput()
 	              }
 	          />
 	        </View>

@@ -62,7 +62,9 @@ class DateTimeComponent extends Component {
       Alert.alert('You need to pick a date and time!');
     }else{
       const { navigate } = this.props.navigation;
-      navigate('ThirdSlide', { chosenDate: this.state.chosenDate, chosenTime: this.state.chosenTime });
+      navigate('ThirdSlide', { 
+        chosenDate: this.state.chosenDate, 
+        chosenTime: this.state.chosenTime });
     }
   }
 

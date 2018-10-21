@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, TextInput, Alert } from 'react-native';
 import styles from '../styles/MasterStyle';
 import { Header1, Header2, Header3, Header4, Header5, Header6, Subtitle1,
          Subtitle2, Body1, Body2, Button1, Caption, Overline
@@ -13,7 +13,12 @@ class AirlineNameComponent extends Component {
 	
 	constructor(props) {
     super(props);
-    this.state = { text: null };
+    this.state = { 
+    	text: null,
+    	date: this.props.navigation.state.params.chosenDate,
+    	time: this.props.navigation.state.params.chosenTime,
+    	airport: this.props.navigation.state.params.airport,
+    };
       this.checkInput = this.checkInput.bind(this);
   }
 
@@ -22,12 +27,18 @@ class AirlineNameComponent extends Component {
       Alert.alert('You need to enter an airline!');
     }else{
       const { navigate } = this.props.navigation;
-      navigate('ThirdSlide', { airlineName: this.state.text });
+      navigate('FifthSlide', { 
+      	airlineName: this.state.text, 
+      	date: this.state.date, 
+      	time: this.state.time, 
+      	airport: this.state.airport });
     }
   }
 
 	render(){
+      	const { navigate } = this.props.navigation;
 		return (
+
 	      <View style={styles.maincontainer}>
 	      	{/* UPPER CONTAINER --> MODIFY*/} 
         <Header3 output='Which airline will you be flying with?' style={{textAlign: "center"}}/>
@@ -49,7 +60,7 @@ class AirlineNameComponent extends Component {
 	              size = {40}
 	              style= {{justifyContent: 'space-evenly', alignItems: 'center'}}
 	              onPress={() =>
-	              navigate('SecondSlide')
+	              	this.checkInput()
 	              }
 	          />
 	        </View>
