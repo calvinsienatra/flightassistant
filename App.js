@@ -11,6 +11,7 @@ import { StackNavigator } from 'react-navigation';
 
 import WelcomeComponent from "./Components/WelcomeComponent";
 import DateTimeComponent from "./Components/DateTimeComponent";
+import DepartureStationComponent from "./Components/DepartureStationComponent";
 import CurrentLocationComponent from "./Components/CurrentLocationComponent";
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
@@ -29,7 +30,7 @@ const App = StackNavigator(
     }
   },
   ThirdSlide: { 
-    screen: CurrentLocationComponent, 
+    screen: DepartureStationComponent, 
     navigationOptions: {
       header: null,
     }
