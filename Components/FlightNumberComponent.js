@@ -9,39 +9,45 @@ import { Icon } from 'react-native-elements';
 import Autocomplete from 'react-native-autocomplete-input';
 
 
-class DepartureStationComponent extends Component {
+class FlightNumberComponent extends Component {
+	
 	constructor(props) {
     super(props);
     this.state = { 
     	text: null,
     	date: this.props.navigation.state.params.chosenDate,
     	time: this.props.navigation.state.params.chosenTime,
+    	airport: this.props.navigation.state.params.airport,
+    	airlineName: this.props.navigation.state.params.airportName,
     };
-    this.checkInput = this.checkInput.bind(this);
+      this.checkInput = this.checkInput.bind(this);
   }
 
   checkInput = () => {
     if(this.state.text == null){
-      Alert.alert('You need to enter an airport!');
+      Alert.alert('You need to enter a flight number!');
     }else{
       const { navigate } = this.props.navigation;
-      navigate('FourthSlide', { 
-      	airport: this.state.text, 
+      navigate('SixthSlide', { 
+      	flightNumber: this.state.text, 
       	date: this.state.date, 
-      	time: this.state.time});
+      	time: this.state.time, 
+      	airport: this.state.airport, 
+      	airlineName: this.state.airlineName });
     }
   }
 
 	render(){
       	const { navigate } = this.props.navigation;
 		return (
+
 	      <View style={styles.maincontainer}>
 	      	{/* UPPER CONTAINER --> MODIFY*/} 
-        <Header3 output='Which airport are you flying from?' style={{textAlign: "center"}}/>
+        <Header3 output='What is your flight number?' style={{textAlign: "center"}}/>
         <TextInput
 	        style={{height: 60, borderWidth: 0, fontSize: 20, marginTop: 10, color: "white", textAlign: "center"}}
 	        onChangeText={(text) => this.setState({text})}
-	        placeholder="Enter Airport Code (e.g. AUS)"
+	        placeholder="Enter Flight Number (e.g. 1490)"
 	      />
 	        
 	        
@@ -65,6 +71,6 @@ class DepartureStationComponent extends Component {
 	}
 }
 
-export default DepartureStationComponent;
+export default FlightNumberComponent;
 
 

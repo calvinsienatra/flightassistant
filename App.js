@@ -15,6 +15,9 @@ import DepartureStationComponent from "./Components/DepartureStationComponent";
 import CheckInOptionsComponent from "./Components/CheckInOptionsComponent";
 import CheckedBaggagesComponent from "./Components/CheckedBaggagesComponent";
 import TSAPreCheckedComponent from "./Components/TSAPreCheckedComponent";
+import CurrentLocationComponent from "./Components/CurrentLocationComponent";
+import AirlineNameComponent from "./Components/AirlineNameComponent";
+import FlightNumberComponent from "./Components/FlightNumberComponent";
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
 const App = StackNavigator(
@@ -39,6 +42,24 @@ const App = StackNavigator(
   },
   FourthSlide: { 
     screen: TSAPreCheckedComponent,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  FourthSlide: { 
+    screen: AirlineNameComponent, 
+    navigationOptions: {
+      header: null,
+    }
+  },
+  FifthSlide: { 
+    screen: FlightNumberComponent, 
+    navigationOptions: {
+      header: null,
+    }
+  },
+  SixthSlide: { 
+    screen: CurrentLocationComponent, 
     navigationOptions: {
       header: null,
     }
