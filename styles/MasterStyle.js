@@ -13,6 +13,7 @@ export default StyleSheet.create({
   	height: 50,
   	backgroundColor: 'lightblue',
   	justifyContent: 'center',
+  	alignItems: 'center',
   	marginTop: 15
   },
 
@@ -30,5 +31,12 @@ export default StyleSheet.create({
     width: "100%",
     height: 480,
     bottom: 0
+  },
+  map: {
+    position: "absolute",
+	top: 0,
+	left: 0,
+	right: 0,
+	bottom: 0
   }
 });
