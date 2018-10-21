@@ -13,6 +13,7 @@ export default StyleSheet.create({
   	height: 50,
   	backgroundColor: 'lightblue',
   	justifyContent: 'center',
+  	alignItems: 'center',
   	marginTop: 15
   },
 

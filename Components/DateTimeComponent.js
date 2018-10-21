@@ -67,8 +67,6 @@ class DateTimeComponent extends Component {
   }
 
   render() {
-    
-    
     return (
       <View style={styles.maincontainer}>
         <Header3 output='When are you flying?' style={{textAlign: "center"}}/>
