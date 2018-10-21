@@ -6,78 +6,54 @@ import { Header1, Header2, Header3, Header4, Header5, Header6, Subtitle1,
        } from '../styles/FontComponents';
 import colors from '../styles/ColorStyles';
 import { Icon } from 'react-native-elements';
+import LocationView from "react-native-location-view";
 import MapView from 'react-native-maps';
 
 
 class CurrentLocationComponent extends Component {
-	state = {
-    	mapRegion: null,
-    	lastLat: null,
-    	lastLong: null,
-  	}
 
-  	componentDidMount() {
-    	this.watchID = navigator.geolocation.watchPosition((position) => {
-      	// Create the object to update this.state.mapRegion through the onRegionChange function
-      	let region = {
-        	latitude:       position.coords.latitude,
-        	longitude:      position.coords.longitude,
-        	latitudeDelta:  0.00922*1.5,
-        	longitudeDelta: 0.00421*1.5
-      	}
-      	this.onRegionChange(region, region.latitude, region.longitude);
-    	});
-  	}
+  constructor(){
+      super();
 
-  	onRegionChange(region, lastLat, lastLong) {
-    	this.setState({
-      		mapRegion: region,
-      		// If there are no new values set use the the current ones
-      		lastLat: lastLat || this.state.lastLat,
-      		lastLong: lastLong || this.state.lastLong
-    	});
-  	}
+      this.state = {
+        curLatitude: null,
+        curLongitude: null,
+      };
 
-  	componentWillUnmount() {
-    	navigator.geolocation.clearWatch(this.watchID);
-  	}
+      this.checkInput = this.checkInput.bind(this);
+  }
 
-  	onMapPress(e) {
-    	console.log(e.nativeEvent.coordinate.longitude);
-    	let region = {
-    		latitude:       e.nativeEvent.coordinate.latitude,
-      		longitude:      e.nativeEvent.coordinate.longitude,
-      		latitudeDelta:  0.00922*1.5,
-      		longitudeDelta: 0.00421*1.5
-    	}
-    	this.onRegionChange(region, region.latitude, region.longitude);
-  	}
+  checkInput = (data) => {
+    this.state = {
+      curLatitude: data.latitude,
+      curLongitude: data.longitude,
+    };
 
-	render(){
-		return(
-			<View style={{flex: 1}}>
-        		<MapView
-          			style={styles.map}
-          			region={this.state.mapRegion}
-          			showsUserLocation={true}
-          			followUserLocation={true}
-          			onRegionChange={this.onRegionChange.bind(this)}
-          			onPress={this.onMapPress.bind(this)}>
-          			<MapView.Marker
-            			coordinate={{
-              				latitude: (this.state.lastLat + 0.00050) || -36.82339,
-              				longitude: (this.state.lastLong + 0.00050) || -73.03569,
-            			}}>
-            			<View>
-              				<Text style={{color: '#000'}}>
-                				{ this.state.lastLong } / { this.state.lastLat }
-              				</Text>
-            			</View>
-          			</MapView.Marker>
-        		</MapView>
-      		</View>
-		);
-	}
+    console.log(this.state.curLatitude);
+    console.log(this.state.curLongitude);
+  }
+
+	render() {
+
+    return (
+
+   <View style={{flex: 1}}>
+        <LocationView
+          apiKey={"AIzaSyD7GU2D3RQU0Md3mmL748BIonHQFPNt9O4"}
+          initialLocation={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+          }}
+          markerColor="#841584"
+          onLocationSelect={(data) =>
+            this.checkInput(data)
+            }
+        />
+      </View>
+
+
+    );
+  }
 }
 
 export default CurrentLocationComponent;
