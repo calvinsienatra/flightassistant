@@ -14,33 +14,42 @@ class TSAPreCheckedComponent extends Component {
     super(props);
 
     this.state = {
-      buttonColor: "#7986CB" // default button color goes here
+      buttonColorA: "#7986CB",
+      buttonColorB: "#7986CB" // default button color goes here
     };
   }
   
-  onButtonPress = () => {
-      this.setState({ buttonColor: "#E8EAF6" }); 
+  onButtonAPress = () => {
+      this.setState({buttonColorA: "#C5CAE9", buttonColorB: "#7986CB"});
   }
+
+  onButtonBPress = () => {
+      this.setState({buttonColorB: "#C5CAE9", buttonColorA: "#7986CB"});
+  }
+
   render() {
     const { navigate } = this.props.navigation;
-    
+
     return (
       <View style={styles.maincontainer}>
-        <View style={{flex: 1,flexDirection: "row"}}>
-          <View style={{flex: 3, justifyContent: "center",padding: 20, marginBottom:70}}> 
-            <Header4 output="Do you have TSA Pre-Check?" style={{marginBottom: 20}}/>
+        <View style={{flex: 3,flexDirection: "row", alignItems:'center'}}>
+          <View style={{flex: 3, flexDirection:"column", alignItems: 'stretch', justifyContent: "center",padding: 20, marginBottom:70}}> 
+            <Header4 output="Do you have TSA Pre-check?" style={{flex:1, justifyContent: 'center', marginTop: 150}}/>
+            <View style={{flex:1, flexDirection: "column", justifyContent: 'space-evenly', marginBottom:100}}>
             <Button
               title="Yes"
-              color={this.state.buttonColor}
-              style={{marginBottom: 100, flex: 1, alignItems: 'space-evenly'}}
-              onPress={onButtonPress}
+              color={this.state.buttonColorA}
+              style={{height: 50, width: '100%'}}
+              onPress={this.onButtonAPress}
             />
+
             <Button
               title="No"
-              color={this.state.buttonColor}
-              style={{marginTop: 100, flex: 1, alignItems: 'space-evenly'}}
-              onPress={onButtonPress}
+              color={this.state.buttonColorB}
+              style={{height: 50,width: '100%'}}
+              onPress={this.onButtonBPress}
             />
+            </View>
             
           </View>
           
@@ -56,7 +65,7 @@ class TSAPreCheckedComponent extends Component {
               size = {40}
               style= {{justifyContent: 'space-evenly', alignItems: 'center'}}
               onPress={() =>
-              navigate('SecondSlide')
+              navigate('FirstSlide')
               }
           />
         </View>
