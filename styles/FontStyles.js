@@ -3,7 +3,8 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   roboto : {
   	fontFamily: "Roboto",
-  	fontWeight : "normal"
+  	fontWeight : "normal",
+    color: "white"
   },
   header1: {
   	fontSize: 96,
