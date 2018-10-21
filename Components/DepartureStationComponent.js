@@ -12,6 +12,8 @@ class DepartureStationComponent extends Component {
 		return(
 			<View>
 				<Header3 output='this is the DepartureStationComponent'/>
+				<Text>{this.props.navigation.state.params.chosenDate}</Text>
+				<Text>{this.props.navigation.state.params.chosenTime}</Text>
 			</View>
 		);
 	}

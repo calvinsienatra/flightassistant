@@ -30,5 +30,9 @@ export default StyleSheet.create({
     width: "100%",
     height: 480,
     bottom: 0
+  },
+  datePicker:{
+    color: "white",
+    fontSize: 20
   }
 });

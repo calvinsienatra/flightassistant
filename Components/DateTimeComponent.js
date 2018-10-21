@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Alert } from 'react-native';
 import styles from '../styles/MasterStyle';
 import { Header1, Header2, Header3, Header4, Header5, Header6, Subtitle1,
          Subtitle2, Body1, Body2, Button1, Caption, Overline
@@ -12,17 +12,37 @@ import moment from 'react-moment';
 class DateTimeComponent extends Component {
   constructor(){
       super();
+
       this.state = {
         isVisible: false,
-        chosenDate: ''
+        chosenDate: null,
+        chosenTime: null,
+        chosenTimeDisplay: null,
       };
+
+      this.checkInput = this.checkInput.bind(this);
   }
+
+  tConvert(time) {
+  // Check correct time format and split into components
+  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) { // If time format correct
+    time = time.slice (1);  // Remove full string match value
+    time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join (''); // return adjusted time or original string
+}
+
 
   handlePicker = (datetime) => {
     this.setState({
       isVisible: false,
+      chosenDate: datetime.toDateString(),
+      chosenTime: datetime.toTimeString(),
+      chosenTimeDisplay: this.tConvert(datetime.toLocaleTimeString()),
     });
-    console.log('A date and time has been picked: ', datetime);
   }
 
   hidePicker = () => {
@@ -37,15 +57,32 @@ class DateTimeComponent extends Component {
     });
   }
 
+  checkInput = () => {
+    if(this.state.chosenDate == null || this.state.chosenTime == null){
+      Alert.alert('You need to pick a date and time!');
+    }else{
+      const { navigate } = this.props.navigation;
+      navigate('ThirdSlide', { chosenDate: this.state.chosenDate, chosenTime: this.state.chosenTime });
+    }
+  }
+
   render() {
-    const { navigate } = this.props.navigation;
+    
     
     return (
-      <View style={styles.container}>
-        <Header3 output='When are you flying?'/>
+      <View style={styles.maincontainer}>
+        <Header3 output='When are you flying?' style={{textAlign: "center"}}/>
 
-        <TouchableOpacity style={styles.button} onPress={this.showPicker}>
-          <Button1 output='Departure date'/>
+        <Header6 output={this.state.chosenDate} style={{marginBottom: 5, marginTop: 20}}/>
+        <Header6 output={this.state.chosenTimeDisplay} style={{marginBottom: 20, marginTop: 5}}/>
+
+        <TouchableOpacity>
+          <Button
+            onPress={this.showPicker}
+            title="Select A Departure Date"
+            color="#841584"
+            style={[styles.datePicker, {marginBottom: 50}]}
+          />
         </TouchableOpacity>
 
         <DateTimePicker
@@ -53,10 +90,14 @@ class DateTimeComponent extends Component {
           onConfirm={this.handlePicker}
           onCancel={this.hidePicker}
           mode={'datetime'}
+          minimumDate={new Date()}
           is24Hour={false}
         />
 
-        <Icon 
+          
+        <View style={styles.bottomcontainer}>
+          <Body1 output="Press to continue" style={{marginBottom: 10}}/>
+          <Icon 
             raised
             name='arrow-right'
             type= 'material-community'
@@ -64,9 +105,10 @@ class DateTimeComponent extends Component {
             size = {40}
             style= {{justifyContent: 'space-evenly', alignItems: 'center'}}
             onPress={() =>
-            navigate('ThirdSlide')
+              this.checkInput()
             }
-        />
+          />
+        </View>
         
       </View>
     );
