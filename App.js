@@ -12,7 +12,9 @@ import { StackNavigator } from 'react-navigation';
 import WelcomeComponent from "./Components/WelcomeComponent";
 import DateTimeComponent from "./Components/DateTimeComponent";
 import DepartureStationComponent from "./Components/DepartureStationComponent";
-import CurrentLocationComponent from "./Components/CurrentLocationComponent";
+import CheckInOptionsComponent from "./Components/CheckInOptionsComponent";
+import CheckedBaggagesComponent from "./Components/CheckedBaggagesComponent";
+import TSAPreCheckedComponent from "./Components/TSAPreCheckedComponent";
 import getSlideFromRightTransition from 'react-navigation-slide-from-right-transition';
 
 const App = StackNavigator(
@@ -24,17 +26,24 @@ const App = StackNavigator(
     }
   },
   SecondSlide: { 
-    screen: DateTimeComponent,
+    screen: CheckInOptionsComponent,
     navigationOptions: {
       header: null,
     }
   },
   ThirdSlide: { 
-    screen: DepartureStationComponent, 
+    screen: CheckedBaggagesComponent,
+    navigationOptions: {
+      header: null,
+    }
+  },
+  FourthSlide: { 
+    screen: TSAPreCheckedComponent,
     navigationOptions: {
       header: null,
     }
   }
+
 },
 {
   transitionConfig: getSlideFromRightTransition,

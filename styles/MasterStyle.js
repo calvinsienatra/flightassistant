@@ -9,14 +9,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   button: {
-  	width: 250, 
   	height: 50,
-  	backgroundColor: 'lightblue',
+    borderRadius: 30,
   	justifyContent: 'center',
-  	alignItems: 'center',
-  	marginTop: 15
+    backgroundColor: "#7986CB",
+    alignItems: 'stretch',
+  	marginTop: 15,
+    textAlign: "center",
   },
-
   bottomcontainer: {
     width: '100%',
     justifyContent: 'center', 

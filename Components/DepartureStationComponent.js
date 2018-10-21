@@ -31,10 +31,7 @@ class DepartureStationComponent extends Component {
 
 	componentDidMount(){
 		{/*Making JSON file */}	
-		require('airport-codes').toJSON().then((json) =>{
-			const{results: airports} = json;
-			this.setState({airports});
-		});
+		
 	}
 
 	findAirport(query){
